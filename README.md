@@ -1,70 +1,111 @@
-# Saas UI - Next.js - landing page.
-
-This is a free Next.js landing page template based on https://saas-ui.dev.
-Feel free to submit any feature requests. If you use this template please share what you've built [on Twitter](https://twitter.com/saas_js) 🚀.
-
-**[View demo](https://saas-ui-nextjs-landing-page.netlify.app/)**
-
-## Tech
-
-- Next.js
-- Chakra UI
-- Saas UI
-- Contentlayer
-- Typescript
-
-## Features
-
-- Feature blocks
-- Testimonials
-- Pricing tables
-- Log in and Sign up pages
-- FAQ
-
-## In progress
-
-- [ ] Supabase Auth
-- [ ] Waitlist sign-up with GetRevue
-- [ ] Blog (Contentlayer)
-- [ ] Docs
+# Pantheon Decoupled Kit Next WordPress Starter
 
 ## Getting Started
 
-First, clone this repo and run `pnpm i`
+There are two ways to get started with the Next WordPress Starter:
 
-To start the app run:
+**Option 1**: Use `create-next-app`
+
+1. In your terminal, run the following command:
 
 ```bash
-pnpm dev
+npx create-next-app -e https://github.com/pantheon-systems/next-wordpress-starter --use-npm
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Follow the prompts in your terminal to complete the setup.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+**Option 2**: Clone the repo
 
-## Configuration
+1. Clone this repo:
 
-Configuration files to edit basic site information, add testimonials, faq and pricing table can be found in `/data`.
+```bash
+git clone git@github.com:pantheon-systems/next-wordpress-starter.git
+```
 
-## Learn More
+2. Install node modules
 
-Find out more about Saas UI.
+```bash
+cd next-wordpress-starter && npm install
+```
 
-- [Saas UI Documentation](https://saas-ui.dev/docs/introduction).
+For either option, create a `.env.development.local` file and update it with the
+following: (See .env.example for an example)
 
-To learn more about Next.js, take a look at the following resources:
+```
+WPGRAPHQL_URL=
+IMAGE_DOMAIN=
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Run `npm run dev` to start in dev mode, or `npm run build && npm start` to
+   start in production mode.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+4. Open a browser and navigate to `http://localhost:3000`.
 
-## Deploy on Vercel
+## Pantheon @pantheon-systems/wordpress-kit
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The Pantheon @pantheon-systems/wordpress-kit is included as a dependency in this
+project. This allows developers to make use of utility functions to simplify the
+process of building and maintaining a Front-End site on Pantheon.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The `tailwindcssPlugin` is included in this project and is used to map WordPress
+Block Editor styles to Tailwind styles.
 
-## License
+Full documentation can be found at:
+https://github.com/pantheon-systems/decoupled-kit-js/tree/canary/web/docs/Packages/wordpress-kit
 
-MIT
+## Tests
+
+Tests are written with [`vitest`](https://vitest.dev/). All new functionality
+should have unit tests or snapshot tests where applicable. Snapshot tests are
+using
+[`@testing-library/react`](https://testing-library.com/docs/react-testing-library/intro/).
+
+### Commands
+
+This section assumes the package manager in use is `npm`. If you are not using
+`npm`, replace `npm` with the name of your package manager.
+
+To run the tests:
+
+```bash
+npm test
+```
+
+To run the tests in watch mode:
+
+```bash
+npm run test:watch
+```
+
+### Updating Snapshots
+
+Snapshots should be updated when presentational changes are made. If a new page
+route is added, create a new snapshot test for it, and include any data needed
+to run that test successfully. Please commit the updated snapshots along with
+your changes.
+
+To update a snapshot:
+
+Run the following helper command:
+
+```bash
+npm run update-snapshots
+```
+
+Or, run the test for a single profile in watch mode (see above), then in the
+terminal press the **u** key. This will update the snapshot for the running
+profile Be sure to update the snapshot for both profiles.
+
+### Use `POST` for GraphQL requests
+
+This starter uses `GET` for GraphQL requests by default. Editing this
+configuration to use `POST` requests can be done in `/lib/WordPressClient.js`.
+
+To achieve this, set each `GraphqlClientFactory` constructors `method` parameter
+to equal `POST`.
+
+```js
+export const client = new GraphqlClientFactory(process.env.backendUrl, {
+	method: 'POST',
+}).create();
+```

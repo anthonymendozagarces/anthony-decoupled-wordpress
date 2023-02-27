@@ -1,41 +1,53 @@
 {
-  "name": "saas-ui-nextjs-landing-page",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@chakra-ui/react": "^2.3.7",
-    "@chakra-ui/skip-nav": "^2.0.11",
-    "@chakra-ui/system": "^2.3.1",
-    "@chakra-ui/theme-tools": "^2.0.12",
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
-    "@fontsource/inter": "^4.5.14",
-    "@saas-ui/react": "1.6.1",
-    "@svgr/webpack": "^6.5.1",
-    "contentlayer": "^0.2.9",
-    "date-fns": "^2.29.3",
-    "framer-motion": "^7.6.5",
-    "next": "13.0.2",
-    "next-contentlayer": "^0.2.9",
-    "next-seo": "^5.14.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-icons": "^4.6.0",
-    "react-remove-scroll": "^2.5.5"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.20.2",
-    "@types/node": "18.11.9",
-    "@types/react": "18.0.25",
-    "@types/react-dom": "18.0.8",
-    "eslint": "8.27.0",
-    "eslint-config-next": "13.0.2",
-    "typescript": "4.8.4"
-  }
+	"name": "@pantheon-systems/next-wordpress-starter",
+	"version": "2.0.0",
+	"private": true,
+	"description": "Pantheon Decoupled Kit's Next WordPress Starter",
+	"license": "GPL-3.0-or-later",
+	"homepage": "https://github.com/pantheon-systems/decoupled-kit-js#readme",
+	"bugs": "https://github.com/pantheon-systems/decoupled-kit-js/issues/new?template=bug-report-template.yml",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/pantheon-systems/decoupled-kit-js"
+	},
+	"author": "@pantheon-systems",
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build && cp -r .next/static .next/standalone/.next && cp -r public .next/standalone",
+		"start": "node .next/standalone/server.js",
+		"build:mono": "next build",
+		"start:mono": "next start",
+		"lint": "next lint",
+		"prettier": "prettier \"**/*.{js,jsx,md}\" --check --ignore-path .prettierignore",
+		"prettier:fix": "prettier \"**/*.{js,jsx,,md}\" --write --ignore-path .prettierignore",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"update-snapshots": "vitest run --update --silent",
+		"coverage": "vitest run --coverage"
+	},
+	"dependencies": {
+		"@pantheon-systems/nextjs-kit": "1.7.0",
+		"@pantheon-systems/wordpress-kit": "2.14.0",
+		"@tailwindcss/typography": "^0.5.9",
+		"dotenv": "^16.0.2",
+		"next": "^13.1.5",
+		"next-seo": "^5.15.0",
+		"react": "18.2.0",
+		"react-dom": "18.2.0",
+		"sharp": "^0.31.3"
+	},
+	"devDependencies": {
+		"@testing-library/react": "13.4.0",
+		"@vitejs/plugin-react": "^3.0.1",
+		"autoprefixer": "^10.4.12",
+		"c8": "^7.12.0",
+		"eslint": "^8.32.0",
+		"eslint-config-next": "^13.1.5",
+		"msw": "^1.0.0",
+		"postcss": "^8.4.21",
+		"prettier": "^2.8.3",
+		"tailwindcss": "^3.1.8",
+		"vite": "^4.0.4",
+		"vitest": "^0.28.3"
+	}
 }
